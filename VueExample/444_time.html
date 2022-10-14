@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+		<title>第四周-计时器的实现</title>
+	</head>
+	
+	<body>
+		<div id="t">
+			0
+		</div>
+		<input type="button" id="tstart" value="开始" />
+		<input type="button" id="tstop" value="停止" />
+		
+
+		<div id="app">
+			{{vueTime}}<br />
+			<button @click="vueStatrt()">vue开始</button>
+			<button @click="vueStop()">vue结束</button>
+		</div>
+	</body>
+	
+	<script>
+		var i=0;
+		var timer;
+		tstart.onclick=function(){
+			timer=window.setInterval(function(){
+				t.innerText=i++;
+			},1000);
+		}
+		tstop.onclick=function(){
+			window.clearInterval(timer)
+		}
+		
+		var vm = new Vue({
+			el:"#app",
+			
+			data:{
+				vueTime:0
+			},
+			methods:{
+				vueStatrt:function(){
+					timer=window.setInterval(function(){
+						vm.vueTime++;
+					},1000)
+				},
+				vueStop:function(){
+					window.clearInterval(timer)
+				}
+			},
+			beforeCreate:function(){
+				console.log("创建前")
+			},
+			mounted:function(){
+				console.log("载入")
+			},
+			beforeUpdate:function(){
+				console.log("变量更新前显示")
+			},
+			updated:function(){
+				console.log("变量更新后显示")
+			},
+			beforeRouteUpdate:function(){
+				console.log("改变前")
+			},
+			destroyed:function(){
+				console.log("销毁后")
+			}
+		})
+	</script>
+	
+</html>

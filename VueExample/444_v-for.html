@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第四周-v-for(循环)</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<!-- 从一开始，循环到10 -->
+			<ul v-for="count in 10">
+				<li>{{count}}</li>
+			</ul>
+			
+			<!-- 生成列表 -->
+			<ul v-for="(student,index) in students">
+				<li>{{index+1}}：姓名{{student.name}}，年龄是{{student.age}}，所在班级是{{student.class}}。</li>
+			</ul>
+			
+			<!-- 生成表格 -->
+			<table border="1" style="border-collapse:collapse; text-align:center; padding:3px;" >
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>姓名</th>
+						<th>年龄</th>
+						<th>班级</th>
+						<th>数学成绩</th>
+						<th>语文成绩</th>
+						<th>总成绩</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(student,index) in students">
+						<td>{{index+1}}</td>
+						<td>{{student.name}}</td>
+						<td>{{student.age}}</td>
+						<td>{{student.class}}</td>
+						<td>{{student.scores.math}}分</td>
+						<td>{{student.scores.chinese}}分</td>
+						<td>{{total(index)}}分</td>
+					</tr>
+				</tbody>
+				
+			</table>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	// el：元素挂载，将Vue实例与HTML元素进行绑定
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				showPic:false,
+				showtext:"显示",
+				students:[
+					{
+						name:"张三",
+						age:19,
+						class:"软工1班",
+						scores:{
+							math:50,
+							chinese:60
+						}
+					},
+					{
+						name:"李四",
+						age:20,
+						class:"软工2班",
+						scores:{
+							math:50,
+							chinese:70
+						}
+					},
+					{
+						name:"王五",
+						age:21,
+						class:"软工1班",
+						scores:{
+							math:50,
+							chinese:80
+						}
+					},
+					{
+						name:"赵柳",
+						age:22,
+						class:"软工2班",
+						scores:{
+							math:50,
+							chinese:90
+						}
+					}
+				]
+			},
+			methods:{
+				total:function(index){
+					// var stu = this.students[index];
+					// return stu.math+stu.chinese;
+					var totalScore = 0;
+					var scores = this.students[index].scores;
+					for(var i in scores){
+						totalScore+=scores[i];
+					}
+					return totalScore;
+				}
+			}
+		})
+	</script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第三周-求总分与平均分</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			科目1：<input type="text" v-model.number="score1" />分<br>
+			科目2：<input type="text" v-model.number="score2" />分<br>
+			科目3：<input type="text" v-model.number="score3" />分<br>
+			科目4：<input type="text" v-model.number="score4">分<br>
+			科目5：<input type="text" v-model.number="score5">分<br>
+			<div>总分：{{sum}}分</div>
+			<div>平均分：{{avg}}分/div>
+			
+			<!-- v-bind属性绑定 -->
+			<div><a v-bind:href="url">百度</a></div>
+			<div><a :href="url">百度</a></div>
+			<div><a href="http://www.baidu.com">百度</a></div>
+		</div>
+	</body>
+	
+	<script>
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				score1:2,
+				score2:3 ,
+				score3:4,
+				score4:5,
+				score5:6,
+				url:"http://www.baidu.com"
+			},
+			computed:{
+				avg:function(){
+					return (this.sum/5).toFixed(2)
+				},
+				sum:function(){
+					return this.score1+this.score2+this.score3+this.score4+this.score5
+				}
+			}
+		})
+	</script>
+</html>

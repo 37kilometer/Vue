@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第一次作业（v-for生成仓库货物信息表）</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<!-- 表名 -->
+			<h2 style="text-align: center;">仓库货物信息表</h2>
+			<h3 style="text-align: center;">公司：天猫贸易有限公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：福州市XX路</h3>
+			
+			<!-- 生成表格 -->
+			<table border="1" style="border-collapse:collapse; text-align:center; padding:3px; margin:0px auto;" >
+				<thead>
+					<tr>
+						<th>仓库</th>
+						<th>鞋子</th>
+						<th>袜子</th>
+						<th>电视</th>
+						<th>冰箱</th>
+						<th>总量</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(warehouse,index) in warehouses">
+						<td>{{warehouse.name}}</td>
+						<td>{{warehouse.goods.shoes}}</td>
+						<td>{{warehouse.goods.socks}}</td>
+						<td>{{warehouse.goods.television}}</td>
+						<td>{{warehouse.goods.freezer}}</td>
+						<td>{{total(index)}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+	// el：元素挂载，将Vue实例与HTML元素进行绑定
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				warehouses:[
+					{
+						name:"仓库A",
+						goods:{
+							shoes:1,
+							socks:2,
+							television:3,
+							freezer:4
+						}
+					},
+					{
+						name:"仓库B",
+						goods:{
+							shoes:5,
+							socks:6,
+							television:7,
+							freezer:8
+						}
+					}		
+				]
+			},
+			methods:{
+				total:function(index){
+					var totalGood = 0;
+					var goods = this.warehouses[index].goods;
+					for(var i in goods){
+						totalGood+=goods[i];
+					}
+					return totalGood;
+				}
+			}
+		})
+	</script>
+</html>

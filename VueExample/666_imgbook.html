@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>第六周-imgbook</title>
+	<style type="text/css">
+		.item{
+			width: 350px;
+			height: 100px;
+			line-height: 100px;
+			border-bottom: 1px solid #999999;
+		}
+		.item img{
+			width: 100px;
+			float: left;
+		}
+	</style>
+	<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+
+<body>
+	<div id="app">
+		<div>
+			<div class="item" v-for="book in books">
+				<img :src="book.image" />
+				<span>{{book.bookName}}</span>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script>
+	var vm = new Vue({
+		el: "#app",
+		data: {
+			books:[
+				{
+					bookName:"前段JavaScript",
+					image:"img/c.png"
+				},
+				{
+					bookName:"HTML入门",
+					image:"img/c.png"
+				},
+				{
+					bookName:"Java服务端编程",
+					image:"img/c.png"
+				},
+				{
+					bookName:"C语言基础",
+					image:"img/c.png"
+				},
+				{
+					bookName:"Java基础",
+					image:"img/c.png"
+				}
+			]
+		},
+		methods: {
+			
+		},
+		computed: {
+			result:function(){
+				var books = this.books;
+				if(this.searchStr == ''){
+					return books;
+				}
+				var searchStr = this.searchStr.trim().toLowerCase();
+				book.filter(function(item){
+					if(){
+						return books;
+					}
+				})
+			}
+		},
+		// watch:用于监听data里面的数据是否被修改，一旦修改就可以执行一些其他的操作【也是方法】
+		watch:{
+		
+		}
+	})
+</script>

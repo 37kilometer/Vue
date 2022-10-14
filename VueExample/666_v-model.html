@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第六周-v-model应用</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<!-- 添加水果数据 -->
+			<div>
+				<input type="text" v-on:keyup.enter="addItem()" v-model="item">
+			</div>
+			<!-- 删除水果数据 -->
+			<ul>
+				<li v-for="(it,index) in items">
+					{{it.text}}<button v-on:click="removeItem(index)">X</button>
+				</li>
+			</ul>
+			<!-- 全选水果选项 -->
+			<div>
+				<input type="checkbox" value="香蕉" v-model="checkFruits" />香蕉
+				<input type="checkbox" value="苹果" v-model="checkFruits" />苹果
+				<input type="checkbox" value="芒果" v-model="checkFruits" />芒果
+				<input type="checkbox" value="芭乐" v-model="checkFruits" />芭乐
+			</div>
+			<p>
+				<button @click="allChecked">全选</button>
+				<button @click="allnotChecked()">全不选</button>
+				<button @click="reverseChecked()">反选</button>
+			</p>
+			<div>
+				{{result}}
+			</div>
+		</div>
+	</body>
+
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				item: "",
+				items: [{
+					text: "苹果"
+				}, {
+					text: "香蕉"
+				}],
+				checkFruits: [],
+				fruits: ["香蕉", "苹果", "芒果", "芭乐"],
+				tempArr: []
+			},
+			methods: {
+				addItem: function() {
+					var txt = this.item.replaceAll(' ', '');
+					if (txt) {
+						this.items.push({
+							text: txt
+						});
+					}
+					this.item = "";
+				},
+				removeItem: function(idx) {
+					this.items.splice(idx, 1);
+				},
+				allChecked: function() {
+					this.checkFruits = this.fruits;
+				},
+				allnotChecked: function() {
+					this.checkFruits = [];
+				},
+				reverseChecked: function() {
+					this.tempArr = [];
+					for (var i = 0; i < this.fruits.length; i++) {
+						if (!this.checkFruits.includes(this.fruits[i])) {
+							this.tempArr.push(this.fruits[i]);
+						}
+					}
+					this.checkFruits = this.tempArr;
+				}
+			},
+			computed: {
+				result: function() {
+					var show = "您选中的水果是：";
+					for (var i = 0; i < this.checkFruits.length; i++) {
+						show += this.checkFruits[i] + "";
+					}
+					return show;
+				}
+			},
+			// watch:用于监听data里面的数据是否被修改，一旦修改就可以执行一些其他的操作【也是方法】
+			
+			// 计算属性和监听属性的不同
+			//     1.计算属性的get必须有return，而监听属性return可有可无
+			//     2.计算属性具有缓存的效果，而监听属性没有缓存
+			//     3.计算属性可以自定义名称，而监听属性只能监听和data里面的名称相同
+			//     4.计算属性适用于复杂的运算，而监听属性适合一些消耗性功能，比如Ajax
+			watch: {
+				"checkFruits": function() {
+					if (this.checkFruits.length > 0) {
+						this.checked = true;
+					} else {
+						this.checked = false;
+					}
+				}
+			}
+		})
+	</script>

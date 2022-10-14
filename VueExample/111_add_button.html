@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第一周-自增按钮</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			{{message}}。{{say()}}
+			<p></p>
+			{{message1}}
+			<button @click="message1++">自增</button>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				message:"hello,vue",
+				username:"zhangsan",
+				message1:"0"
+			},
+			methods:{
+				say:function(){
+					return "hello!" + this.username
+				}
+			}
+		})
+	</script>
+</html>

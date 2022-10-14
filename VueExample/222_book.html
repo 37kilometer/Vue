@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>第二周-书总价计算</title>
+		<script src="js/vue.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<div id="">
+				单价：<input type="text" v-model="bookprice">元
+				<button type="button" @click="bookprice++">单价自增</button>
+				<button type="button" @click="bookprice--">单价自减</button>
+			</div>
+			<div id="">
+				数量：<input type="text" v-model="booknum">本
+				<button type="button" @click="booknum++">数量自增</button>
+				<button type="button" @click="booknum--">数量自减</button>
+			</div>
+			<div>总价：{{getAllPrice}}元</div>
+		</div>
+	</body>
+	
+	<script type="text/javascript">
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				booknum:3,
+				bookprice:20,
+				price:0
+			},
+			computed:{
+				getAllPrice:function(){
+					return this.booknum * this.bookprice;
+				}
+			}
+		})
+	</script>
+</html>
